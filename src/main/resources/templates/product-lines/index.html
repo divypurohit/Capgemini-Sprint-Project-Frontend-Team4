@@ -8,14 +8,24 @@
   <link rel="stylesheet" th:href="@{/css/dashboard.css}">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script th:src="@{/js/dashboard.js}" defer></script>
+
 </head>
 <body>
 
 <div class="app-wrapper">
+  <div class="container mt-3">
+    <nav style="font-size:0.8rem; color:#6b6b66;">
+      <a th:href="@{/product-lines}" style="text-decoration:none; color:#6b6b66;">Home</a>
+      <span> / </span>
+      <span th:text="${page}">Page</span>
+    </nav>
+  </div>
+  <br>
   <div class="page-header">
     <h1>Product Lines</h1>
     <p>Manage your product categories and descriptions.</p>
   </div>
+
 
   <div id="toastContainer"></div>
 

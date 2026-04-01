@@ -1,12 +1,14 @@
 package com.example.ProjectSprintFrontend.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/product-lines")
 public class ProductLineController {
+
     // Serves the main Product Lines dashboard
     @GetMapping("")
     public String renderDashboard() {
@@ -15,7 +17,8 @@ public class ProductLineController {
 
     // Serves the View Products page
     @GetMapping("/products")
-    public String renderProductsPage() {
+    public String renderProductsPage(Model model) {
+        model.addAttribute("page","Products");
         return "product/index";
     }
 }

@@ -11,6 +11,13 @@
 <body>
 
 <div class="app-wrapper">
+    <div class="container mt-3">
+        <nav style="font-size:0.8rem; color:#6b6b66;">
+            <a th:href="@{/product-lines}" style="text-decoration:none; color:#6b6b66;">Home</a>
+            <span> / </span>
+            <span th:text="${page}">Page</span>
+        </nav>
+    </div>
     <div class="page-header">
         <h1>Products for <span id="lineHeaderTitle" style="color: var(--accent);">...</span></h1>
         <p>Viewing all associated products.</p>
