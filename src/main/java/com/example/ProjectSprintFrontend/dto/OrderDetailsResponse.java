@@ -23,8 +23,12 @@ public class OrderDetailsResponse {
 
     public List<OrderDetailDto> getOrderDetails() {
         if (embedded == null) return Collections.emptyList();
-        return embedded.getOrDefault("orderdetails", Collections.emptyList());
+        List<OrderDetailDto> result = embedded.get("orderDetailses");
+        if (result == null) result = embedded.get("orderdetails");
+        if (result == null) result = embedded.get("orderDetails");
+        return result != null ? result : Collections.emptyList();
     }
+    
 
     public void setEmbedded(Map<String, List<OrderDetailDto>> v) { this.embedded = v; }
 }
