@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employee's Customers</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body class="container mt-4 mb-5">
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-info"><i class="bi bi-person-lines-fill"></i> Assigned Customers</h2>
+    <a th:href="@{/}" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Back to Employees</a>
+</div>
+
+<div class="alert alert-light border shadow-sm" role="alert">
+    Viewing customers managed by Employee ID: <strong th:text="${empId}" class="text-primary"></strong>
+</div>
+
+<div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+<table class="table table-hover table-bordered shadow-sm">
+    <thead class="table-dark">
+    <tr>
+        <th>Customer Name</th>
+        <th>Contact Name</th>
+        <th>Phone Number</th>
+        <th>Location</th>
+        <th>Credit Limit</th> </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cust : ${customers}">
+        <td th:text="${cust.customerName}"></td>
+
+        <td th:text="${cust.contactName}"></td>
+
+        <td th:text="${cust.phoneNumber}"></td>
+
+        <td th:text="${cust.location}"></td>
+
+        <td th:text="${'$' + #numbers.formatDecimal(cust.creditLimit, 1, 'COMMA', 2, 'POINT')}"></td>
+    </tr>
+    <tr th:if="${customers == null or #lists.isEmpty(customers)}">
+        <td colspan="4" class="text-center text-muted py-4">
+            <i class="bi bi-emoji-frown fs-4 d-block mb-2"></i>
+            This employee does not have any assigned customers.
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<nav th:if="${pageInfo != null and pageInfo.totalPages > 1}">
+    <ul class="pagination justify-content-center">
+
+        <li class="page-item" th:classappend="${pageInfo.number == 0} ? 'disabled'">
+            <a class="page-link" th:href="@{/customers(empId=${empId}, page=${pageInfo.number - 1})}">&laquo;
+                Previous</a>
+        </li>
+
+        <li class="page-item" th:each="i : ${#numbers.sequence(0, pageInfo.totalPages - 1)}"
+            th:classappend="${pageInfo.number == i} ? 'active'">
+            <a class="page-link" th:href="@{/customers(empId=${empId}, page=${i})}" th:text="${i + 1}"></a>
+        </li>
+
+        <li class="page-item" th:classappend="${pageInfo.number + 1 >= pageInfo.totalPages} ? 'disabled'">
+            <a class="page-link" th:href="@{/customers(empId=${empId}, page=${pageInfo.number + 1})}">Next &raquo;</a>
+        </li>
+
+    </ul>
+</nav>
+
+</body>
+</html>
