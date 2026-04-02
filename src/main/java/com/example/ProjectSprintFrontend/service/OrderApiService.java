@@ -25,7 +25,7 @@ public class OrderApiService {
     private final String baseUrl;
 
     public OrderApiService(RestTemplate restTemplate,
-                           @Value("${backend.api.base-url}") String baseUrl) {
+                           @Value("${backend.base-url}") String baseUrl) {
         this.restTemplate = restTemplate;
         this.baseUrl = baseUrl;
     }
